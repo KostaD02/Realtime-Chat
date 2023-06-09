@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "realtime-chat-kd": {
+      "hosting": {
+        "real-time-chat": [
+          "realtime-chat-kd"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "realtime-chat-kd"
+  }
+}

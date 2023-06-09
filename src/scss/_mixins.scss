@@ -1,10 +1,11 @@
 @use "./variables" as *;
 
-@mixin flex-center($gap: 0px) {
+@mixin flex-center($gap: 0px, $flex-direction: row) {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: $gap;
+  flex-direction: $flex-direction;
 }
 
 @mixin button-style() {

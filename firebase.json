@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "real-time-chat",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

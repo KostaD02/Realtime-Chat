@@ -1,0 +1,9 @@
+<main>
+  <section class="wrapper">
+    <h3>Auth</h3>
+    <div class="buttons">
+      <app-sign-in-buttons (click)="signIn(UserAuthType.Google)" [src]="'https://developers.google.com/identity/images/g-logo.png'" [text]="'Sign in with Google'"></app-sign-in-buttons>
+      <app-sign-in-buttons (click)="signIn(UserAuthType.Anonymous)" [src]="'https://cdn.iconscout.com/icon/free/png-256/free-incognito-6-902117.png?f=webp'" [text]="'Sign in anonymously'"></app-sign-in-buttons>
+    </div>
+  </section>
+</main>

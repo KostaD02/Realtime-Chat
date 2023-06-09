@@ -1,0 +1,11 @@
+@use "../../../scss/variables" as *;
+@use "../../../scss/mixins" as *;
+
+button {
+  @include button-style();
+}
+
+button:hover,
+button:focus-visible {
+  @include button-style-focus();
+}

@@ -1,0 +1,10 @@
+<ng-container *ngIf="target === ''; else href">
+  <a [routerLink]="link">
+    {{ text }}
+  </a>
+</ng-container>
+<ng-template #href>
+  <a [href]="link" target="_blank">
+    {{ text }}
+  </a>
+</ng-template>
