@@ -1,0 +1,28 @@
+@use "./variables" as *;
+
+@mixin flex-center($gap: 0px) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $gap;
+}
+
+@mixin button-style() {
+  color: $green-color;
+  font-size: 13px;
+  line-height: 1;
+  padding: 0.75rem 1rem;
+  background-color: transparent;
+  border: $border;
+  border-radius: $border-radius;
+  text-decoration: none;
+  transition: $transition;
+  cursor: pointer;
+  user-select: none;
+}
+
+@mixin button-style-focus() {
+  outline: none;
+  box-shadow: $box-shadow;
+  transform: $transform;
+}
