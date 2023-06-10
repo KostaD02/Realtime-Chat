@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { HomepageComponent, NotfoundComponent, AuthComponent } from './views';
 import { AnchorComponent, ButtonComponent, SignInButtonsComponent } from './shared';
 import { MaterialModule } from './module';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { MaterialModule } from './module';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase || "add your firebase creds")
   ],
   providers: [],

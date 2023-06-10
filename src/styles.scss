@@ -15,8 +15,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: 20px !important;
-  font-weight: 600 !important;
+  font-weight: 600;
   font-family: 'Montserrat', sans-serif !important;
   color: $lightest-slate-color;
   margin: 0px 0px 10px;
@@ -61,9 +60,37 @@ a.external {
   }
 }
 
+input.my-theme {
+  margin: 0px 0px 0.5rem;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $slate-color;
+  background-color: $light-navy-color;
+  background-clip: padding-box;
+  border: 1px solid $slate-color;
+  border-radius: 0.375rem;
+  transition: $transition;
+
+  &::placeholder {
+    color: $slate-color;
+  }
+
+  &:focus {
+    color: $slate-color;
+    background-color: $light-navy-color;
+    outline: none;
+    border-color: $green-color;
+  }
+}
+
 *::selection {
   color: $green-color;
-  background-color: $lightest-navy-color
+  background-color: $lightest-navy-color;
 }
 
 *::-webkit-scrollbar {
