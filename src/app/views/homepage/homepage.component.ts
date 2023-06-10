@@ -17,7 +17,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   public userUID: string = "";
   public chats: IChat[] = [];
   public activeChat!: IChat;
-  public activeChatIndex: number = 0; // ! change it later to -1
+  public activeChatIndex: number = -1;
 
   public message: string = "";
   public chatID: string = "";
