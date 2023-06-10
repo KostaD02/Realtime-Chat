@@ -12,12 +12,13 @@ import Swal from 'sweetalert2';
 })
 export class HomepageComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
-  private readonly GeneralChatID: string = "JTyA2v4yUkjDDvQKBrma"; // ? create one general chat by hand
+  public readonly GeneralChatID: string = "JTyA2v4yUkjDDvQKBrma"; // ? create one general chat by hand
 
   public userUID: string = "";
   public chats: IChat[] = [];
   public activeChat!: IChat;
   public activeChatIndex: number = -1;
+  private activeChatID: string = "";
 
   public message: string = "";
   public chatID: string = "";
@@ -38,6 +39,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
           this.chatService.getAllChats().pipe(
             tap(docs => {
               this.chats = [];
+              this.allChat = [];
               docs.forEach((doc, index) => {
                 this.allChat.push(doc.payload.doc.data() as IChat);
                 const chat = doc.payload.doc.data() as IChat;
@@ -125,6 +127,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.activeChat = chat;
     this.activeChatIndex = index;
     this.message = "";
+    this.activeChatID = chat.id;
     setTimeout(() => {
       this.scrollToLastMessage();
     }, 500);
@@ -190,7 +193,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
             chat.allowedUsersID.push({
               uid: user?.uid || "",
               fullName: user?.displayName || "",
-              isCreator: true,
+              isCreator: false,
               imageURL: user?.photoURL || ""
             });
             this.chatService.updateChat(chat);
@@ -230,5 +233,92 @@ export class HomepageComponent implements OnInit, OnDestroy {
         this.alertService.displayToast("Chat created", 'success', 'green');
       })
     ).subscribe();
+  }
+
+  clearChat() {
+    Swal.fire({
+      title: 'Delete all messages ?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (this.activeChat.messages.length === 0) {
+          Swal.fire(
+            'Hmm',
+            'Nothing to delete',
+            'info'
+          );
+        } else {
+          Swal.fire(
+            'Deleted!',
+            'Chat messages has been deleted.',
+            'success'
+          );
+          this.activeChat.messages = [];
+          this.activeChat.updatedAt = new Date().toString();
+          this.chatService.updateChat(this.activeChat);
+        }
+      }
+    })
+  }
+
+  leaveChat() {
+    Swal.fire({
+      title: 'Leave chat ?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, leave it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Left!',
+          'Your left chat.',
+          'success'
+        );
+        this.activeChat.allowedUsersID = this.activeChat.allowedUsersID.filter(user => user.uid !== this.userUID);
+        this.activeChat.updatedAt = new Date().toString();
+        if (this.activeChat.allowedUsersID.length === 0) {
+          this.chatService.deleteChat(this.activeChat);
+        } else {
+          this.chatService.updateChat(this.activeChat);
+        }
+      }
+    })
+  }
+
+  deleteChat() {
+    Swal.fire({
+      title: 'Delete chat ?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your chat has been deleted.',
+          'success'
+        );
+        this.chatService.deleteChat(this.activeChat);
+      }
+    })
+  }
+
+  isUserAdmin() {
+    return this.activeChat.allowedUsersID.find(user => user.uid === this.userUID)?.isCreator || false;
+  }
+
+  getActiveChat() {
+    return this.allChat.find(chat => chat.id === this.activeChatID) || {name: "", id: ""};
   }
 }

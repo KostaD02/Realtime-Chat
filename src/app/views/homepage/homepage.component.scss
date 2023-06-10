@@ -140,14 +140,16 @@ main {
 
         &__header {
           position: relative;
-          @include flex-center(5px, column);
-          padding: 25px 0px;
+          @include flex-center(5px);
+          justify-content: space-between;
+          padding: 25px 25px;
 
           h3 {
             margin: 0px;
             font-weight: 500;
             font-size: 20px;
             color: $green-color;
+            text-align: center;
           }
 
           h5 {
@@ -155,6 +157,24 @@ main {
             cursor: pointer;
             line-break: anywhere;
             text-align: center;
+          }
+
+          div {
+            svg {
+              width: 20px;
+              height: 20px;
+              transition: $transition;
+              cursor: pointer;
+
+              &:hover {
+                fill: $green-color;
+              }
+            }
+          }
+
+          div.more {
+            display: flex;
+            @include flex-center(5px);
           }
 
           &::after {
@@ -324,6 +344,13 @@ main {
               width: 32px;
               height: 32px;
             }
+          }
+        }
+      }
+      &__messages {
+        &__active_chat {
+          &__header {
+            padding: 25px 5px;
           }
         }
       }
