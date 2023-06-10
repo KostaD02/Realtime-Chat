@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth'
 import { GoogleAuthProvider } from '@angular/fire/auth';
 import { AlertService } from './alert.service';
 import { tap } from 'rxjs';
+import { Anonymous, AnonymousService } from './anonymous.service';
 
 export enum UserAuthType {
   Google = "google",
@@ -18,14 +19,9 @@ export class AuthService {
   constructor(
     private router: Router,
     private fireAuth: AngularFireAuth,
-    private alertService: AlertService
-  ) {
-    this.authState.pipe(
-      tap(result => {
-        console.log(result);
-      })
-    ).subscribe();
-  }
+    private alertService: AlertService,
+    private anonymousService: AnonymousService
+  ) {}
 
   get authState() {
     return this.fireAuth.authState;
@@ -45,6 +41,13 @@ export class AuthService {
     this.fireAuth.signInAnonymously().then(res => {
       if (res.user) {
         this.handleUserAuth();
+        this.anonymousService.getAnonymousByID("qTltfsa5g14cfM1PZgtg").pipe(
+          tap(result => {
+            const data = result.data() as Anonymous;
+            data.count++;
+            this.anonymousService.updateAnonymous(data);
+          })
+        ).subscribe();
       }
     }).catch(err => {
       this.handleError(err);
