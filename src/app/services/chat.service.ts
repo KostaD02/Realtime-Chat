@@ -3,6 +3,25 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 export interface IChat {
   id: string;
+  name: string;
+  messages: IChatMessage[];
+  createAt: string;
+  updatedAt: string;
+  imageURL?: string;
+  allowedUsersID: IChatUsers[];
+}
+
+export interface IChatMessage {
+  id: string;
+  message: string;
+  createAt: string;
+  uploaderID: string;
+}
+
+export interface IChatUsers {
+  uid: string;
+  fullName: string;
+  imageURL: string;
 }
 
 @Injectable({
