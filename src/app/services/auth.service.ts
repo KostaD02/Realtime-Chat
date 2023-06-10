@@ -72,6 +72,7 @@ export class AuthService {
 
   public logOut() {
     this.fireAuth.signOut().then(() => {
+      this.alertService.displayToast("Successfully log out", "success", "green");
       this.router.navigateByUrl('/auth');
     }, err => {
       console.log(err);

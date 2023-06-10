@@ -1,1 +1,7 @@
+<header>
+  <section>
+    <h3>Realtime chat</h3>
+    <button *ngIf="authState | async as user" (click)="logOut()">Log out</button>
+  </section>
+</header>
 <router-outlet></router-outlet>
