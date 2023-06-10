@@ -122,6 +122,15 @@ main {
       }
     }
 
+    .no-chat {
+      height: 100%;
+      @include flex-center();
+      p {
+        font-size: 20px;
+        color: $lightest-slate-color;
+      }
+    }
+
     &__messages {
       &__active_chat {
         display: grid;
