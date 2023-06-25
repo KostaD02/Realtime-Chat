@@ -61,12 +61,13 @@ export class HomepageComponent implements OnInit, OnDestroy {
                     this.chats.push(chat);
                   }
                 }
-                if (index === this.activeChatIndex) {
-                  this.activeChat = chat;
-                  setTimeout(() => {
-                    this.scrollToLastMessage();
-                  }, 500);
-                }
+                // if (index === this.activeChatIndex) {
+                //   console.log(this.activeChatIndex);
+                //   this.activeChat = chat;
+                //   setTimeout(() => {
+                //     this.scrollToLastMessage();
+                //   }, 500);
+                // }
               });
             }),
             takeUntil(this.destroy$)
