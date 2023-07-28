@@ -61,13 +61,12 @@ export class HomepageComponent implements OnInit, OnDestroy {
                     this.chats.push(chat);
                   }
                 }
-                // if (index === this.activeChatIndex) {
-                //   console.log(this.activeChatIndex);
-                //   this.activeChat = chat;
-                //   setTimeout(() => {
-                //     this.scrollToLastMessage();
-                //   }, 500);
-                // }
+                if (this.activeChatID === chat.id) {
+                  this.activeChat = chat;
+                  setTimeout(() => {
+                    this.scrollToLastMessage();
+                  }, 500);
+                }
               });
             }),
             takeUntil(this.destroy$)
@@ -320,6 +319,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
 
   getActiveChat() {
-    return this.allChat.find(chat => chat.id === this.activeChatID) || {name: "", id: ""};
+    return this.allChat.find(chat => chat.id === this.activeChatID) || { name: "", id: "" };
   }
 }
